@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::prefix('anime/')->group(function () {
     Route::get('/', [HomeController::class, 'search'])->name('anime.search');
+    Route::get('/trending', [HomeController::class, 'trending'])->name('anime.trending');
+    Route::get('/today', [HomeController::class, 'today'])->name('anime.today');
+    Route::get('/top', [HomeController::class, 'top'])->name('anime.top');
+    Route::get('/upcoming', [HomeController::class, 'upcoming'])->name('anime.upcoming');
     Route::get('details/{id}/{slug}', [HomeController::class, 'detail'])->name('anime.detail');
     Route::get('details/{id}/{slug}/character', [HomeController::class, 'detail_character'])->name('anime.detail.character');
 });

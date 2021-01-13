@@ -17,14 +17,14 @@
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4">
                             <div class="btn__all">
-                                <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                <a href="{{ route('anime.today') }}" class="primary-btn">View All <span class="arrow_right"></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         {{-- {{ dd($today[strtolower(date('l'))][0]) }} --}}
                         @foreach ($today as $p)
-                        <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <a href="{{ url('anime/details/' . $p['mal_id'] . '/' . str_slug($p['title'], '-')) }}" class="clearfix">
                                     <div class="product__item__pic set-bg" data-setbg="{{ $p['image_url'] }}">
@@ -39,7 +39,7 @@
                                         <li>{{ $genre['name'] }}</li>
                                         @endforeach
                                     </ul>
-                                    <h5><a href="{{ url('anime/details/' . $p['mal_id'] . '/' . str_slug($p['title'], '-')) }}">{{ $p['title'] }}</a></h5>
+                                    <h6><a href="{{ url('anime/details/' . $p['mal_id'] . '/' . str_slug($p['title'], '-')) }}">{{ $p['title'] }}</a></h6>
                                 </div>
                             </div>
                         </div>
@@ -55,19 +55,18 @@
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4">
                             <div class="btn__all">
-                                <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                <a href="{{ route('anime.top') }}" class="primary-btn">View All <span class="arrow_right"></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         @foreach ($top_alltime as $p)
-                        <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <a href="{{ url('anime/details/' . $p['mal_id'] . '/' . str_slug($p['title'], '-')) }}" class="clearfix">
                                     <div class="product__item__pic set-bg" data-setbg="{{ $p['image_url'] }}">
-                                        <div class="ep">{{ $p['type'] }}</div>
-                                        <div class="comment"><i class="fa fa-tv"></i> {{ $p['episodes'] }}</div>
-                                        <div class="view"><i class="fa fa-users"></i> {{ $p['members'] }}</div>
+                                        <div class="ep"> Rank {{ $p['rank'] }}</div>
+                                        <div class="view bg-success">{{ $p['score'] }}</div>
                                     </div>
                                 </a>
                                 <div class="product__item__text">
@@ -87,7 +86,7 @@
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4">
                             <div class="btn__all">
-                                <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                <a href="{{ route('anime.upcoming') }}" class="primary-btn">View All <span class="arrow_right"></span></a>
                             </div>
                         </div>
                     </div>
@@ -226,21 +225,24 @@
             <div class="col-lg-4 col-md-6 col-sm-8">
                 <div class="product__sidebar">
                     <div class="product__sidebar__view">
-                        <div class="section-title">
-                            <h5>Top 5</h5>
+                        <div class="row">
+                            <div class="col">
+                                <div class="section-title">
+                                    <h5>Top 10 Airing</h5>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="btn__all">
+                                    <a href="{{ route('anime.trending') }}" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                </div>
+                            </div>
                         </div>
-                        <ul class="filter__controls">
-                            <li class="active" data-filter="*">Day</li>
-                            <li data-filter=".week">Week</li>
-                            <li data-filter=".month">Month</li>
-                            <li data-filter=".years">Years</li>
-                        </ul>
                         <div class="filter__gallery">
                             @foreach ($top_airing as $p)
                             <div class="product__sidebar__view__item set-bg mix day years"
                                 data-setbg="{{ $p['image_url'] }}">
                                 <div class="ep">{{ $p['rank'] }}</div>
-                                <div class="view"><i class="fa fa-users"></i> {{ $p['members'] }}</div>
+                                <div class="view bg-success"><i class="fa fa-star"></i> {{ $p['score'] }}</div>
                                 <h5><a href="{{ url('anime/details/' . $p['mal_id'] . '/' . str_slug($p['title'], '-')) }}">{{ $p['title'] }}</a></h5>
                             </div>
                             @endforeach
