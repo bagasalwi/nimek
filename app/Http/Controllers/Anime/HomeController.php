@@ -29,7 +29,22 @@ class HomeController extends Controller
         return view('front.home', $data);
     }
 
-    public function detail($id, $slug){
+    public function search(Request $request){
+        if($request->has('search')){
+            $data['res'] = Http::get($this->animeAPI."search/anime",[
+                "q" => $request->search,
+                "limit" => 45,
+                // "genre" => $request->search,
+                // "type" => $request->search,
+            ]);
+
+            $data['search_query'] = $request->search;
+
+            return view('front.search', $data);
+        }
+    }
+
+    public function detail($id){
         
         $data['detail'] = Http::get($this->animeAPI . "anime/" . $id);
         $data['detail_pictures'] = Http::get($this->animeAPI . "anime/" . $id . '/pictures');
@@ -41,5 +56,12 @@ class HomeController extends Controller
         $data['top_upcoming'] = array_slice($topUpcomingAPI['top'], 0, 6, true);
         
         return view('front.anime-detail', $data);
+    }
+
+    public function detail_character($id, $slug){
+        $data['character'] = Http::get($this->animeAPI . "anime/" . $id . '/characters_staff');
+        $data['title'] = $slug;
+
+        return view('front.anime-detail-character', $data);
     }
 }

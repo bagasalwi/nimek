@@ -1,5 +1,7 @@
 @extends('front.layouts.master')
 
+@section('title')Home @endsection
+
 @section('main')
 <!-- Product Section Begin -->
 <section class="product spad">

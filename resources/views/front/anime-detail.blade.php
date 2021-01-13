@@ -1,5 +1,7 @@
 @extends('front.layouts.master')
 
+@section('title'){{ $detail['title'] }}@endsection
+
 @section('main')
 <!-- Breadcrumb Begin -->
 {{-- <div class="breadcrumb-option">
@@ -30,18 +32,22 @@
                 </div>
                 <div class="col-lg-9">
                     <div class="anime__details__text">
-                        <div class="anime__details__title">
-                            <h3>{{ $detail['title'] }}</h3>
-                            <span>{{ $detail['title_japanese'] }}</span>
-                        </div>
-                        <div class="anime__details__rating">
-                            <div class="rating rounded bg-success">
-                                <h2 class="text-light text-center font-weight-bold">{{ $detail['score'] }}</h2>
+                        <h6 class="badge badge-info p-2 mb-2">{{ $detail['status'] }}</h6>
+                        <div class="row">
+                            <div class="anime__details__title col-md-10">
+                                <h3>{{ $detail['title'] }}</h3>
+                                <span>{{ $detail['title_japanese'] }}</span>
                             </div>
-                            <p class="text-center text-light">{{ number_format($detail['scored_by']) }}
-                                Votes</p>
+                            <div class="anime__details__rating col-md-2">
+                                <div class="rating rounded bg-success">
+                                    <h2 class="text-light text-center font-weight-bold">{{ $detail['score'] }}</h2>
+                                </div>
+                                <small class="text-center text-light">{{ number_format($detail['scored_by']) }}
+                                    Votes</small>
+                            </div>
                         </div>
-                        <p>{{ $detail['synopsis'] }}</p>
+
+                        <p class="synopsis">{{ $detail['synopsis'] }}</p>
                         <div class="anime__details__widget">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
@@ -53,19 +59,18 @@
                                             @endforeach
                                         </li>
                                         <li><span>Date aired:</span> {{ $detail['aired']['string'] }}</li>
-                                        <li><span>Status:</span> {{ $detail['status'] }}</li>
                                         <li><span>Genre:</span>
                                             @foreach($detail['genres'] as $genre)
                                             {{ $genre['name'] }},
                                             @endforeach
                                         </li>
+                                        <li><span>Duration:</span> {{ $detail['duration'] }}</li>
                                     </ul>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
                                     <ul>
                                         <li><span>Rank:</span> {{ $detail['rank'] }}</li>
                                         <li><span>Rating:</span> {{ $detail['rating'] }}</li>
-                                        <li><span>Duration:</span> {{ $detail['duration'] }}</li>
                                         <li><span>Source:</span> {{ $detail['source'] }}</li>
                                         <li><span>Members:</span> {{ $detail['members'] }}</li>
                                     </ul>
@@ -73,12 +78,15 @@
                             </div>
                         </div>
                         <div class="anime__details__btn">
-                            <a href="#" class="follow-btn">Character</a>
+                            <a href="{{ url('anime/details/' . $detail['mal_id'] . '/' . str_slug($detail['title'], '-')) . '/character' }}"
+                                class="follow-btn">Character</a>
+                            @if ($detail['trailer_url'])
                             <button type="button" class="follow-btn border-0" data-toggle="modal"
                                 data-target="#modalTrailer">
                                 <i class="fa fa-tv"></i> Watch Trailer
                             </button>
-                            <a href="#" class="watch-btn"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                            @endif
+                            {{-- <a href="#" class="watch-btn"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a> --}}
                         </div>
                     </div>
                 </div>
@@ -146,6 +154,7 @@
             </div>
         </div>
 
+        @if ($detail_recommendation)
         <div class="anime__details__review">
             <div class="section-title">
                 <h5>RECOMMENDATION</h5>
@@ -169,8 +178,9 @@
                 @endforeach
             </div>
         </div>
+        @endif
 
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-lg-8 col-md-8">
                 <div class="anime__details__review">
                     <div class="section-title">
@@ -270,7 +280,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </section>
 <!-- Anime Section End -->
@@ -290,3 +300,11 @@
 </div>
 
 @endsection
+
+@push('script')
+<script>
+    // $(document).ready(function () {
+        //     $('#synopsis').readmore();
+        // });
+</script>
+@endpush

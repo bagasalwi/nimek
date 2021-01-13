@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Anime\HomeController;
+use App\Http\Controllers\Anime\CharacterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,5 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::prefix('anime/')->group(function () {
+    Route::get('/', [HomeController::class, 'search'])->name('anime.search');
     Route::get('details/{id}/{slug}', [HomeController::class, 'detail'])->name('anime.detail');
+    Route::get('details/{id}/{slug}/character', [HomeController::class, 'detail_character'])->name('anime.detail.character');
+});
+
+Route::prefix('character/')->group(function () {
+    Route::get('{id}/{slug}', [CharacterController::class, 'detail'])->name('character.detail');
 });
