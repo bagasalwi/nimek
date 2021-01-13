@@ -246,7 +246,7 @@
                             @endforeach
                         </div>
                     </div>
-                    <div class="product__sidebar__comment">
+                    {{-- <div class="product__sidebar__comment">
                         <div class="section-title">
                             <h5>New Comment</h5>
                         </div>
@@ -302,7 +302,7 @@
                                 <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
