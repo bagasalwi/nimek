@@ -24,7 +24,7 @@
                     <div class="row">
                         {{-- {{ dd($today[strtolower(date('l'))][0]) }} --}}
                         @foreach ($today as $p)
-                        <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="col-6 col-lg-3 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <a href="{{ url('anime/details/' . $p['mal_id'] . '/' . str_slug($p['title'], '-')) }}" class="clearfix">
                                     <div class="product__item__pic set-bg" data-setbg="{{ $p['image_url'] }}">
@@ -61,7 +61,7 @@
                     </div>
                     <div class="row">
                         @foreach ($top_alltime as $p)
-                        <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="col-6 col-lg-3 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <a href="{{ url('anime/details/' . $p['mal_id'] . '/' . str_slug($p['title'], '-')) }}" class="clearfix">
                                     <div class="product__item__pic set-bg" data-setbg="{{ $p['image_url'] }}">
@@ -92,7 +92,7 @@
                     </div>
                     <div class="row">
                         @foreach ($top_upcoming as $p)
-                        <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="col-6 col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <a href="{{ url('anime/details/' . $p['mal_id'] . '/' . str_slug($p['title'], '-')) }}" class="clearfix">
                                     <div class="product__item__pic set-bg" data-setbg="{{ $p['image_url'] }}">
